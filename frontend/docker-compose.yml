@@ -1,0 +1,15 @@
+version: '3'
+services:
+  frontend:
+    image: ghcr.io/int371/frontend:latest
+    restart: on-failure
+    container_name: frontend
+    ports:
+      - "8080:80"
+    networks:
+      project:
+        ipv4_address: 172.23.10.1
+networks:
+  project:
+    external:
+      name: rvcomfort

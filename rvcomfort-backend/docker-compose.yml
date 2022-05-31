@@ -1,0 +1,26 @@
+version: '3'
+services:
+  backend:
+    image: ghcr.io/int371/rvcomfort-backend:latest
+    restart: on-failure
+    container_name: backend
+    ports:
+      - "8083:8083"
+    environment:
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_SCHEMA: ${DATABASE_SCHEMA}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      FRONT_END_HOST: ${FRONT_END_HOST}
+      JWT_SECRET: ${JWT_SECRET}
+      SPRING_PROFILES_ACTIVE: dev
+    volumes:
+      - ./resources:/src/main/resources
+    networks:
+      project:
+        ipv4_address: 172.23.20.2
+networks:
+  project:
+    external:
+      name: rvcomfort
