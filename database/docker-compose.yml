@@ -1,0 +1,21 @@
+version: '3'
+services:
+  mysql:
+    image: mysql/mysql-server:8.0.26
+    container_name: mysql
+    restart: on-failure
+    environment:
+      - MYSQL_PORT=3306
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PSW}
+      - TZ=Asia/Bangkok
+    ports:
+      - '3306'
+    volumes:
+      - ./database-initial.sql:/docker-entrypoint-initdb.d/1.sql
+    networks:
+      project:
+        ipv4_address: 172.23.30.3
+networks:
+  project:
+    external:
+      name: rvcomfort
